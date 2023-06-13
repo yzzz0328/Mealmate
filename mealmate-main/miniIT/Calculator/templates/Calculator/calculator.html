@@ -1,0 +1,162 @@
+{% extends 'mealmate/base.html' %}
+{% load static %}
+{% block Calculator %}
+
+<h2><b>&#6158;&emsp;Food Calorie Calculator</b></h2>
+<br>
+<div class = "row">
+    <div class="col">
+        <div class="table-responsive">
+
+            <form method="get">
+              &#6158;&emsp;&emsp;{{ myFilter.form }}
+            
+              <input type="submit" value="Search"></input>
+            
+            </form>
+            
+
+        </div>
+    </div>
+</div>
+
+<br> 
+<h3>&#6158;&emsp;Food</h3>
+<div class = "mx-4 mb-4" style="height:300px; overflow:auto;">  
+  <div class="table-responsive">
+    <table id="Food" class="table table-striped table-hover table-sm" width="100%" cellspacing="0">
+      <thead style='background-color:#2a324b; color:#e1e5ee'>
+
+              <tr>
+                  <th style="text-align: center;">Name</th>
+                  <th style="text-align: center;">Mealtype</th>
+                  <th style="text-align: center;">Calories</th>
+                  <th style="text-align: center;">Carbs</th>
+                  <th style="text-align: center;">Protein</th>
+                  <th style="text-align: center;">Fat</th>
+                  <th style="text-align: center;">Fibre</th>
+                  <th style="text-align: center;">Size</th>
+                  <th style="text-align: center;">Quantity</th>
+              </tr>
+          </thead>
+          <tbody>
+
+            {% for name in name %}
+    
+            <tr>
+                <td>{{ name.name }}</td>
+                <td>
+                  {% if name.mealtype %}
+                   {{ name.mealtype }}
+                  {% else %}
+                    Ingredient 
+                  {% endif %}</td>
+                <td>{{ name.calories }}</td>
+                <td>{{ name.carbs }}</td>
+                <td>{{ name.protein }}</td>
+                <td>{{ name.fat }}</td>
+                <td>{{ name.fibre }}</td>
+                <td>{{ name.size }}</td>
+                <td>
+                    <form action="{% url 'Calculator:cart_add' name.id %}" method="post">
+                        <b>{{ cart_form.quantity.label_tag }} </b> {{ cart_form.quantity }} &#6158;&nbsp;&nbsp;&nbsp;
+                        {{ cart_form.update }}
+                        <input type="submit" value="Add">
+                        {% csrf_token %}
+                    </form>  
+                </td>              
+    
+            </tr>
+    
+            {% endfor %}
+            </tbody>   
+
+    </table>
+  </div>
+</div>
+<br>
+
+<h3>&#6158;&emsp;My food</h3>
+<div class = "mx-4 mb-4">  
+  <div class="table-responsive">
+    <table id="Myfood" class="table table-striped table-hover table-sm" width="100%" cellspacing="0">
+      <thead style='background-color:#2a324b; color:#e1e5ee'>
+        <tr>
+          <th style="text-align: center;">Name</th>
+          <th style="text-align: center;">Quantity</th>
+          <th style="text-align: center;">Unit calories</th>
+          <th style="text-align: center;">Total Calories</th>
+          <th style="text-align: center;">Delete</th>
+  
+      </tr>
+  </thead>
+  <tbody>
+      {% for item in cart %}
+        {% with foodinfo=item.foodinfo %}
+          <tr>
+            <td>{{ foodinfo.name }}</td>
+            <td>{{ item.quantity }}</td>
+            <td class="num">{{ item.calories }}</td>
+            <td class="num">{{ item.total_calories }}</td>
+            
+            <td><a href="{% url 'Calculator:cart_remove' foodinfo.id %}">Remove</a></td>
+          </tr>
+        {% endwith %}
+      {% endfor %}
+      <tr class="total">
+        <td colspan="3" style="text-align: right;"><b>Sum</b></td>
+        <td class="num">{{ cart.get_sum_calories }}</td>
+      </tr>
+  </tbody>
+
+    <script type="text/javascript">
+            var oRows = document.getElementById('Myfood').getElementsByTagName('tr');
+            var iRowCount = oRows.length;
+            var iiRowCount = iRowCount-2;
+        
+            if (iiRowCount == 0) {
+                document.write("<p>&#6158;&nbsp;You havent add any food yet.</p>");
+            } else if (iiRowCount == 1) {
+                document.write("<p>&#6158;&nbsp;You have added "+ iiRowCount+ " food.</p>");
+            } else {
+                document.write("<p>&#6158;&nbsp;You have added "+ iiRowCount+ " foods.</p>");
+            }
+    </script>
+    </table>
+  </div>
+</div>
+
+
+<caption>
+  <script type="text/javascript">
+    var calories = '{{ cart.get_sum_calories }}';
+    var suggest_m = 2500 - calories;
+    var suggest_f = 2000 - calories;
+    var exceed_suggest_m = suggest_m * -1 ;
+    var exceed_suggest_f = suggest_f * -1 ;
+
+    document.write("<p>&#6158;&emsp;&emsp;You have consume " + calories +" kJ calories.</p>");
+    document.write("<p>&#6158;&emsp;&emsp;Generally, the recommended daily calorie intake is 2000 calories a day for women and 2500 for men.</p>");
+
+    if (suggest_m >0) {
+        document.write("<p>&#6158;&emsp;&emsp;If you are a man, your calorie intake is normal.You still can have " + suggest_m +"kJ of calorie intake.</p>");
+    } else if (suggest_m == 0) {
+        document.write("<p>&#6158;&emsp;&emsp;If you are a man, you have exact calorie intake per day.</p>");
+    } else if (suggest_m <0) {
+        document.write("<p>&#6158;&emsp;&emsp;If you are a man, your calorie intake is exceed " + exceed_suggest_m +"kJ.</p>");
+    }
+
+    if (suggest_f >0) {
+        document.write("<p>&#6158;&emsp;&emsp;If you are a woman, your calorie intake is normal.You still can have " + suggest_f +"kJ of calorie intake.</p>");
+    } else if (suggest_f == 0) {
+        document.write("<p>&#6158;&emsp;&emsp;If you are a woman, you have exact calorie intake per day.</p>");
+    } else if (suggest_f <0) {
+        document.write("<p>&#6158;&emsp;&emsp;If you are a woman, your calorie intake is exceed " + exceed_suggest_f +"kJ.</p>");
+    }
+</script>
+
+  &#6158;&emsp;&emsp;<a href="{% url 'mealmate-mealplan' %}">To know your exact amount of calories intake per day, please click here.</a>
+</caption>
+<br>
+
+{% endblock %}

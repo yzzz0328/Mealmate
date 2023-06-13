@@ -1,0 +1,44 @@
+{% extends "moodjournal/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+<h1 style="font-weight: bold">Mood Journal</h1>
+
+<!-- Search field to filter list of entries to a specific author -->
+<div class="col">
+	<form method="GET">
+		{{ filter.form|crispy }}
+		<button type="submit" class="btn btn-primary">Search</button>
+		<a href="{% url 'moodjournal-home' %}"><button type="button" class="btn btn-secondary">Reset</button></a>
+	</form>	
+</div>
+
+<hr>
+
+<!--Looping function, list of entries is taken from database, for every entry, it will create a new article section containing data from entry.-->
+{% for entry in filter.qs %}
+<article class="media content-section">
+	<div class="media-body">
+
+		<!-- Author and date posted fields are shown using small text on top of article. -->
+		<div class="entry-metadata">
+			<small class="text-muted"
+				>{{ entry.author }}'s Entry at {{ entry.date_posted|date:"h:i A"}}</small
+			>
+		</div>
+
+		<!-- Entry title would show the date of entry + link to a detailed view. -->
+		<h2>
+			<a class="entry-title" href="{% url 'entry-detail' entry.id %}"
+				>{{ entry.date_posted|date:"dS F Y" }}</a
+			>
+		</h2>
+
+		<!-- Journal content would be shown as a paragraph here + Mood Color below it. -->
+		<p class="entry-content">{{ entry.journal }}</p>
+		<hr />
+		<h4>Mood Color: {{ entry.moodcolor }}</h4>
+	</div>
+</article>
+{% endfor %}
+
+{% endblock content %}

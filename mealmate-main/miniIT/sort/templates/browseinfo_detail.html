@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block detail %}
+<div class="card mx-auto w-75 bg-light">
+
+    <div class="card-body">
+      <legend class="d-inline">{{ object.name }}</legend> 
+        <a href="{% url 'display_sortfoods' %}" class="close float-right mr-3">
+            <button type="button" class="close"><span aria-hidden="true">&times;</span></button>
+        </a>
+      <p class= "text-muted">{{ object.calories }}kcal / {{ object.size }}g </p>
+      
+      <hr>
+      <p class="card-text">{{object.description}}</p>
+      {% if object.mealtype %}
+        <p>Mealtype: {{ object.mealtype }}</p>
+      {% else %}  
+        <p>Mealtype: Ingredient</p>
+      {% endif %}  
+        <p class="text-dark">Carbohydrates: {{ object.carbs }}g</p>
+        <p class="text-info">Protein: {{ object.protein }}g</p>
+        <p style="color:orangered">Fat: {{ object.fat }}g</p>
+        <p class="text-success">Fibre: {{ object.fibre }}g</p>
+      </div>
+  </div>
+
+{% endblock %}

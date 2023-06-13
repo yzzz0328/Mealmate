@@ -1,0 +1,95 @@
+{% extends 'mealmate/base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="col-md-4">
+    <div class="container cal-section">
+        <h3>DAILY CALORIE NEEDS</h3>
+        <br>
+            <form method ="POST">
+                {% csrf_token %}
+                {{ form|crispy }}
+                <br>
+                <button type="submit" class="button-cal">Calculate</button>
+
+                <br>
+                <br>    
+                <div class = "result">
+                    {% if calcountgoal %}
+                        <h4> Your daily calorie needs : {{ calcountgoal }} cal</h4>
+                    {% else %}
+                        <h4> Your daily calorie needs : </h4>
+                    {% endif %}
+                </div>
+
+                <br>
+                <br>
+                <button type="submit" class="button" name = "generate"><ins>Generate Your Own Mealplan</ins></button>
+            </form>
+    </div>
+</div>
+{% endblock %}
+
+
+{% block sidebar %}
+<div class="col-md-1">
+</div>
+
+<div class="col-md-6">
+    <div class="mealplan-section">
+        <h3><center>TODAY'S MEAL PLAN</center></h3>   
+        <br>
+        <br>
+        <ul class="list-group">
+
+            <li class="list-group-item"><b>BREAKFAST</b>
+                <br>
+                <br> 
+                {% if bf %}
+                    {% for food in bf %}
+                        {{ food }}
+                        <br>
+                    {% endfor %}
+                {% endif %}
+            </li>
+
+            <li class="list-group-item"><b>LUNCH</b>
+                <br>
+                <br>  
+                {% if lc %}
+                    {% for food in lc %}
+                        {{ food }}
+                        <br>
+                    {% endfor %}
+                {% endif %}
+            </li>
+
+            <li class="list-group-item"><b>DINNER</b> 
+                <br>
+                <br>  
+                {% if dn %}
+                    {% for food in dn %}
+                        {{ food }}
+                        <br>
+                    {% endfor %}
+                {% endif %}
+            </li>
+
+        </ul>
+        <br>
+        <br>
+        <br>
+        <div>
+            {% if calcount %}
+                <h4><b>Total Calories : {{ calcount }} cal</b></h4>
+                <br>
+            {% else %}
+                <h4><b>Total Calories : </b></h4>
+                <br>
+            {% endif %}
+        </div>
+    
+    </div>
+</div>
+{% endblock %}
+

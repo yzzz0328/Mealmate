@@ -1,0 +1,73 @@
+{% extends "moodjournal/base.html" %}
+{% block content %}
+    <h1>About Mood Journal</h1>
+    <p class="lead">
+        <b>Welcome to the Mood Journal!</b> This section of our MealMate app is dedicated
+        for users to record entries of their thoughts and feelings throughout their day.
+    </p>
+    
+    <article class="media content-section">
+        <div class="media-body">
+            <h3>What is this for?</h3><hr>
+            <p class="lead">
+                Trying to be consistent and managing one’s diet becomes harder when the user 
+                is <b>unable to monitor their progress and moods they are feeling throughout their 
+                diet journey.</b> This section would help with that by providing a public posting 
+                area for everyone to share their thoughts on. This could encourage people to <b><em>
+                stay motivated and keep on going!</em></b>
+            </p>
+        </div>
+    </article>
+    
+    <article class="media content-section">
+        <div class="media-body">
+            <h2>How to Use?</h2><hr>
+            <h4>Create an Entry</h4>
+                <ol>
+                    <li>Go to the “Create Entry” page via the first link on the sidebar labeled “New Entry”.</li>
+                    <li>Fill in the blanks. Guidance for the mood ratings are available at the bottom.</li>
+                    <li>Once everything is filled up, click on “Post” and it will redirect you to the home age with your new entry as the latest on top of the list.</li>
+                </ol>
+            <h4>View an Entry</h4>
+                <ol>
+                    <li>Click on the date of an entry to view a detailed page of the individual entry.</li>
+                </ol>
+            <h4>Update an Entry</h4>
+                <ol>
+                    <li>On the detailed entry page, click on “Update” to edit the entry.</li>
+                    <li>You are able to change any of the existing details on the entry.</li>
+                    <li>Submit changes by clicking on “Update” and it will direct you back to the home page.</li>
+                </ol>
+            <h4>Delete an Entry</h4>
+                <ol>
+                    <li>On the detailed entry page, click on “Delete” to remove entry.</li>
+                    <li>Confirm by clicking on “Yes, delete”.</li>
+                    <li>You will be redirected to home with the deleted entry gone.</li>
+                </ol>
+            <h4>Search for Entries from an Author</h4>
+                <ol>
+                    <li>In the field above the list, you can search for a specific author’s entry.</li>
+                    <li>Click on “Search” and it will show only the searched author’s entries.</li>
+                    <li>Click on “Reset” and it will redirect you to the original list.</li>
+                </ol>
+        </div>
+    </article>
+
+    <article class="media content-section">
+        <div class="media-body">
+            <h3>How is Mood Color calculated?</h3><hr>
+            <p>
+                At the Entry Creation page, the 5 integer fields are used to calculate the Mood Color. They would be summed and 
+                calculated an average score between 0 to 10. The scores are defined as follows:
+                <ul>
+                    <li style="color: red;">0 <= score < 2: Red (Worst)</li>
+                    <li style="color: orange;">2 <= score < 4: Orange (Bad)</li>
+                    <li style="color: gold;">4 <= score < 6: Yellow (OK)</li>
+                    <li style="color: green;">6 <= score < 8: Green (Good)</li>
+                    <li style="color: blue;">8 <= score <= 10: Blue (Super)</li>
+                </ul>
+            </p>
+        </div>
+    </article>
+    <blockquote>The module is made by Muhammad Ammar bin Muhamad Azrin (1191102915).</blockquote>
+{% endblock content %}

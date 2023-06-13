@@ -1,0 +1,149 @@
+{% extends 'mealmate/base.html' %}
+{% load static %}
+{% block database %}
+
+{% if messages %} <!-- Display when message detected -->
+  <!-- Modal of Confirm Add -->
+  <div class="modal fade" id="confirmModal" tabindex="-1" role="dialog" aria-labelledby="confirmModalTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-body">
+          <button type="button" class="close d-inline-block" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+                
+        {% for message in messages %}
+          <div class='alert alert-{{ message.tags }}'>
+            {{ message }}
+          </div>
+        {% endfor %}
+        <p class="ml-2">Would you like to add another food into the database?</p>
+        
+        <div class = "d-inline-flex float-right mt-1">
+          <button type="button" class="btn btn-secondary px-3 mx-2" data-dismiss="modal">No</button>
+          <!--Opens Modal of Addfood Form-->
+          <button type="button" class="btn btn-primary px-3"  data-toggle="modal" data-target="#addfoodModalLong">Yes</button>
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endif %}
+
+<div class="fixed-top" style="margin-top:5%; margin-left:2%">
+  <a style="text-decoration:none; float:left ;color:#e1e5ee; background-color: #2a324b;padding:0.5% 1%; border:none; border-radius: 50px; text-align: center; font-weight: 500;" href="{% url 'display_sortfoods' %}">
+    ← Return to browser
+  </a>
+</div>
+
+<!-- Database table display -->
+<div class = "mx-4" style="margin-bottom: 3%; margin-top:2%">  
+  <div class="table-responsive">
+    <table class="table table-striped table-hover table-sm" width="100%" cellspacing="0">
+        <thead style='background-color:#2a324b; color:#e1e5ee'>
+            <tr>
+                <th style="text-align: center;">Name</th>
+                <th style="text-align: center;">Type</th>
+                <th style="text-align: center;">Calories</th>
+                <th style="text-align: center;">Carbs</th>
+                <th style="text-align: center;">Protein</th>
+                <th style="text-align: center;">Fat</th>
+                <th style="text-align: center;">Fibre</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+          {% for food in foods %} <!-- Looping through items in list which was in view's context -->
+            <tr>
+              <td >
+                <a href="{% url 'foodinfo-detail' food.pk %}" class="text-dark"> <!-- Goes to food's info page when it is clicked -->
+                  {{food.name}}
+                </a>
+              </td>
+              <td style="text-align: center;">
+                <a href="{% url 'foodinfo-detail' food.pk %}" class="text-dark">
+                  {% if food.mealtype %}
+                    {{food.mealtype}} <!--Displasy "Breakfast","Lunch",or "Dinner" depending on the data-->
+                  {% else %}
+                    Ingredient <!-- Displays "ingredient" if no mealtype is specified -->
+                  {% endif %}
+                </a>
+              </td>
+              <td style="text-align: center;"><a href="{% url 'foodinfo-detail' food.pk %}" class="text-dark">{{food.calories}}</a></td>
+              <td style="text-align: center;"><a href="{% url 'foodinfo-detail' food.pk %}" class="text-dark">{{food.carbs}}</a></td>
+              <td style="text-align: center;"><a href="{% url 'foodinfo-detail' food.pk %}" class="text-dark">{{food.protein}}</a></td>
+              <td style="text-align: center;"><a href="{% url 'foodinfo-detail' food.pk %}" class="text-dark">{{food.fat}}</a></td>
+              <td style="text-align: center;"><a href="{% url 'foodinfo-detail' food.pk %}" class="text-dark">{{food.fibre}}</a></td>
+              <td style="width:12%">
+                <a class="btn btn-success text-light" style="background-color: #2a324b;border:none" href="{% url 'foodinfo-edit' food.pk %}">Edit</a>
+                <a class="btn btn-danger text-light" href="{% url 'foodinfo-delete' food.pk %}">Delete</a>
+              </td>
+            </tr>                
+
+          {% endfor %}
+        </tbody>
+    </table>
+  </div>
+
+  <!-- Button for adding new food -->
+  <div class="fixed-bottom mt-4 mb-2 mr-2" style='background-color:transparent'>
+    <div>
+      <!--Opens Modal of Addfood Form-->
+      <button type="button" class="button" style="float: right; color:#e1e5ee; background-color: #2a324b;padding:0.5% 1%; border:none; border-radius: 50px; text-align: center; font-weight: 500;"data-toggle="modal" data-target="#addfoodModalLong">
+        ⊕ Click here to add new food into the database
+      </button>
+  </div>
+
+</div>
+
+
+<!-- Modal of Addfood Form -->  
+<div class="modal fade" id="addfoodModalLong" tabindex="-1" role="dialog" aria-labelledby="addfoodModalLongTitle" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="addfoodModalLong">Add food here</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form method="POST">
+        <div class="modal-body">
+          {% csrf_token %} <!--Security measure to prevent CSRF attacks-->
+          {% for field in foodform %}
+            <div class="fieldWrapper form-group" aria-required={% if field.field.required %}"true"{% else %}"false"{% endif %}>
+            {{ field.label_tag }}
+            {{ field }} 
+            {% if field.help_text %} <!-- Checking for if there's a help text -->
+              {% if field.label == "Calories (kcal) :" %}  <!--Checks if label of field is "Calories (kcal) :"-->
+                <!-- Link to Calorie Calculator for Calories field -->
+                <p class="help"><a href="{% url 'Calculator:Calculator-home' %}"><small>{{ field.help_text|safe }}</small></a></p>
+              {% elif field.label == "Meal Type" %} <!--Checks if label of field is "Meal Type"-->
+                <p class="text-muted"><small>{{ field.help_text|safe }}</small></p>
+              {% else %}
+                <p class="text-muted float-right"><small>{{ field.help_text|safe }}</small></p>
+              {% endif %}
+            {% endif %}
+            </div>
+          {% endfor %}
+        </div>
+        <div class = 'modal-footer'>
+          <input type="submit" class='btn btn-primary float-right' value="Submit"> <!--Submits the form and sends a POST request-->
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script>
+      $('#confirmModal').modal('show') // Confirmation box for adding another food is defaulted to on
+    </script>
+</body>
+
+{% endblock %}

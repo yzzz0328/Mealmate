@@ -1,0 +1,22 @@
+  .table table-hover th {
+    cursor: pointer;
+  }
+  
+  .table table-hover .th-sort-asc::after {
+    content: "\25b4";
+  }
+  
+  .table table-hover .th-sort-desc::after {
+    content: "\25be";
+  }
+  
+  .table table-hover .th-sort-asc::after,
+  .table table-hover .th-sort-desc::after {
+    margin-left: 5px;
+  }
+  
+  .table table-hover .th-sort-asc,
+  .table table-hover .th-sort-desc {
+    background: rgba(0, 0, 0, 0.1);
+  }
+  

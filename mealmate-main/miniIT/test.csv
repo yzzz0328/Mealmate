@@ -1,0 +1,63 @@
+id,name,mealtype,descriptions,calories,carbs,protein,fat,fibre,size
+1,Brownie Bites,Breakfast,,100,41,8,4.5,2,59
+2,Yogurt Bar,Breakfast,,110,42,9,5.5,3,60
+3,Chocolate Granola,Breakfast,,100,43,10,6.5,4,61
+4,Frapp 8oz,Breakfast,,70,44,11,7.5,5,62
+5,Frapp 16oz,Breakfast,,130,45,12,8.5,6,63
+6,Potatoe Instant,Breakfast,,160,46,13,9.5,7,64
+7,Cappucino,Breakfast,,50,47,14,10.5,8,65
+8,Chocolate milk,Breakfast,,208,48,15,11.5,9,66
+9,Low fat milk,Breakfast,,121,49,16,12.5,10,67
+10,Yogurt,Breakfast,,225,50,17,13.5,11,68
+11,White bread,Breakfast,,61,51,18,14.5,12,69
+12,Whole wheat bread,Breakfast,,55,52,19,15.5,13,70
+13,Cereal,Breakfast,,110,53,20,16.5,14,71
+14,English muffin,Breakfast,,130,54,21,17.5,15,72
+15,Jaffa Cake,Breakfast,,370,55,22,18.5,16,73
+16,Cornflakes,Breakfast,,370,56,23,19.5,17,74
+17,Muesli,Breakfast,,320,57,24,20.5,18,75
+18,Apple,Breakfast,,44,58,25,21.5,19,76
+19,Banana,Breakfast,,107,59,26,22.5,20,77
+20,Dim sum,Breakfast,,37,60,27,23.5,21,78
+21,Sausage rolls,Breakfast,,101,61,28,24.5,22,79
+22,Fried rice,Lunch,,662,62,29,25.5,23,80
+23,Potato salad,Lunch,,136,63,30,26.5,24,81
+24,Cottage pie,Lunch,,523,64,31,27.5,25,82
+25,Grilled Cheese Sandwich,Lunch,,392,65,32,28.5,26,83
+26,Celery 100g,Lunch,,16,66,33,29.5,27,84
+27,Fuji Apple,Lunch,,130,67,34,30.5,28,85
+28,Pickles,Lunch,,66,68,35,31.5,29,86
+29,Beef stew,Lunch,,186,69,36,32.5,30,87
+30,Beef burger,Lunch,,280,70,37,33.5,31,88
+31,FV Cappucino,Lunch,,50,71,38,34.5,32,89
+32,Mashed potatoes,Lunch,,174,72,39,35.5,33,90
+33,Noodles,Lunch,,70,73,40,36.5,34,91
+34,Pasta,Lunch,,110,74,41,37.5,35,92
+35,Porridge,Lunch,,55,75,42,38.5,36,93
+36,Spagetti,Lunch,,159,76,43,39.5,37,94
+37,Pizza,Lunch,,290,77,44,40.5,38,95
+38,Cheese Stick,Lunch,,70,78,45,41.5,39,96
+39,Cucumber,Lunch,,3,79,46,42.5,40,97
+40,Baked chicken,Lunch,,282,80,47,43.5,41,98
+41,Meat pie,Lunch,,290,81,48,44.5,42,99
+42,Spring roll,Lunch,,350,82,49,45.5,43,100
+43,Chicken Caesar Salad,Lunch,,392,83,50,46.5,44,101
+44,Cabbage (boiled),Dinner,,15,84,51,47.5,45,102
+45,Baby Carrots 100g,Dinner,,70,85,52,48.5,46,103
+46,Brocoli,Dinner,,27,86,53,49.5,47,104
+47,Spicy Chicken Soup,Dinner,,380,87,54,50.5,48,105
+48,Thai Tuna,Dinner,,210,88,55,51.5,49,106
+49,Cauliflower (boiled),Dinner,,30,89,56,52.5,50,107
+50,Celery (boiled),Dinner,,5,90,57,53.5,51,108
+51,Ramen,Dinner,,380,91,58,54.5,52,109
+52,Cup O noodle,Dinner,,300,92,59,55.5,53,110
+53,Nally HOT Chili,Dinner,,561,93,60,56.5,54,111
+54,Tillamok Marrionberry,Dinner,,170,94,61,57.5,55,112
+55,Maple Brownsugar Oatmeal,Dinner,,160,95,62,58.5,56,113
+56,Roasted beef,Dinner,,280,96,63,59.5,57,114
+57,Bacon average fried,Dinner,,250,97,64,60.5,58,115
+58,Chicken Parmesan,Dinner,,250,98,65,61.5,59,116
+59,Duck roast,Dinner,,430,99,66,62.5,60,117
+60,Pea soup,Dinner,,190,100,67,63.5,61,118
+61,Pork chop,Dinner,,295,101,68,64.5,62,119
+62,Brown rice,Dinner,,670,102,69,65.5,63,120

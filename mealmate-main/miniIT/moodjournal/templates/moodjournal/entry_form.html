@@ -1,0 +1,37 @@
+{% extends "moodjournal/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="content-section">
+	<form method="POST" action="">
+		{% csrf_token %}
+		<fieldset class="form-group">
+			<legend class="border-bottom mb-4" style="font-weight: 500">
+				Create Entry
+			</legend>
+			{{ form.author|as_crispy_field }}
+			<div class="form-row">
+				<div class="col-sm-2">{{ form.happiness|as_crispy_field }}</div>
+				<div class="col-sm-2">{{ form.energy|as_crispy_field }}</div>
+				<div class="col-sm-2">{{ form.hunger|as_crispy_field }}</div>
+				<div class="col-sm-2">{{ form.calmness|as_crispy_field }}</div>
+				<div class="col-sm-2">{{ form.health|as_crispy_field }}</div>
+			</div>
+			{{ form.journal|as_crispy_field }}
+			<small class="text-muted">
+				<span style="font-style: italic;">GUIDE for inserting ratings:</span><br>
+				<ul>
+					<li>Happiness: How happy are you feeling?</li>
+					<li>Energy: How are your energy levels? Are you tired or are you feeling energized?</li>
+					<li>Hunger: How satisfied are you with your meals so far?</li>
+					<li>Calmness: Are you stressed out or are you feeling more calm?</li>
+					<li>Health: Are you feeling ill or healthy? Somewhere in between?</li>
+				</ul>
+				*For each category, insert a number from 0-10.
+			</small>
+		</fieldset>
+		<div class="form-group">
+			<button class="btn btn-info" type="submit">Post</button>
+		</div>
+	</form>
+</div>
+{% endblock content %}

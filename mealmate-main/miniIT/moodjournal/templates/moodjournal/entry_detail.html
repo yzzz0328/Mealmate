@@ -1,0 +1,39 @@
+{% extends "moodjournal/base.html" %} {% block content %}
+<h1 style="font-weight: bold">Mood Journal</h1>
+<article class="media content-section">
+	<div class="media-body">
+		<div class="entry-metadata">
+			<small class="text-muted">{{ object.author }}'s Entry at {{ object.date_posted|date:"h:i A"}}</small>
+		</div>
+		<h2 class="entry-title">{{ object.date_posted|date:"dS F Y" }}</h2>
+		<p class="entry-content">{{ object.journal }}</p>
+		<h4>Rating Summary:</h4>
+		<p>
+			Happiness = {{ object.happiness }}<br />
+			Energy = {{ object.energy }}<br />
+			Hunger = {{ object.hunger }}<br />
+			Calmness = {{ object.calmness }}<br />
+			Health = {{ object.health }}<br />
+		</p>
+		<h4>Mood Color: {{object.moodcolor}}</h4>
+		<hr />
+
+		<!-- Options available on detailed page of entry. -->
+		<a
+			class="btn btn-primary btn-sm mt-1 mb-1"
+			href="{% url 'moodjournal-home' %}"
+			>Back</a
+		>
+		<a
+			class="btn btn-outline-secondary btn-sm mt-1 mb-1"
+			href="{% url 'entry-update' object.id %}"
+			>Update</a
+		>
+		<a
+			class="btn btn-outline-danger btn-sm mt-1 mb-1"
+			href="{% url 'entry-delete' object.id %}"
+			>Delete</a
+		>
+	</div>
+</article>
+{% endblock content %}
